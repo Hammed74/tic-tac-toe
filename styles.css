@@ -23,3 +23,8 @@ div{
     width: 90px;
     align-self: center;
 }
+
+.game-results{
+    margin-top: 250px;
+    grid-area: 1/1/2/4;
+}
