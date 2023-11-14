@@ -3,16 +3,16 @@ function createPlayer(type) {
   const playerType = type;
   return { playerType };
 }
-const cells = document.querySelectorAll(".cell");
-const cellsArray = Array.from(cells); //create an Array from our cells
 
 const players = {
   playerX: createPlayer("x"),
   playerO: createPlayer("o"),
 };
 
+  let isOver = false;
+
 const createGameBoard = (function () {
-  const board = Array(9).fill(null);
+  let board = Array(9).fill(null);
   const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -34,40 +34,53 @@ const createGameBoard = (function () {
         board[a] === piece
       ) {
         console.log(piece + " has won!");
-        board.fill(0,null,9)
-        isOver = true
-      } else {
-        return;
+        board.fill(0, null, 9);
+        isOver = true;
+        console.log(isOver)
       }
+      return;
     });
-    
   };
-  let isOver = false;
-  return { board, checkWinner, isOver };
+  return { board, checkWinner};
 })();
 
 const gameFlow = function () {
+createGameBoard.isOver = false
+  const cells = document.querySelectorAll(".cell");
   let currentPlayer = players.playerX;
   const startGame = () => {
     cells.forEach((cell) => {
       cell.addEventListener("click", (event) => {
         const id = event.target.id;
-        if (currentPlayer === players.playerX && createGameBoard.isOver === false) {
+        if (
+          currentPlayer === players.playerX &&
+          isOver === false && createGameBoard.board[id - 1] == null
+        ) {
           createGameBoard.board[id - 1] = "x";
-          cell.style.backgroundColor = "black";
+          cell.style.backgroundImage = "url(assets/star.png)";
           currentPlayer = players.playerO;
           createGameBoard.checkWinner("x");
-          console.log(createGameBoard.board)
-        } else if(currentPlayer = players.playerO && createGameBoard.isOver === false){
+          console.log(createGameBoard.board);
+          console.log(isOver);
+        } else if (
+          currentPlayer === players.playerO &&
+          isOver === false && createGameBoard.board[id - 1] == null
+        ) {
           createGameBoard.board[id - 1] = "o";
-          cell.style.backgroundColor = "green";
+          cell.style.backgroundImage = "url(assets/heart.png)";
           currentPlayer = players.playerX;
           createGameBoard.checkWinner("o");
           console.log(createGameBoard.board);
-        } else if(createGameBoard.isOver === true){
-            for(i=0;i<10;i++){
-                cellsArray[i].style.backgroundColor = "white"
-            }
+          console.log(isOver)
+        } else if (isOver === true) {
+          createGameBoard.board.fill(null);
+          currentPlayer = players.playerX;
+          isOver = false;
+          cells.forEach(cell => {
+            cell.style.backgroundImage = "";
+          });
+        } else{
+            alert("You cant do that")
         }
       });
     });

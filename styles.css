@@ -28,3 +28,8 @@ div{
     margin-top: 250px;
     grid-area: 1/1/2/4;
 }
+
+.cell{
+    background-repeat: no-repeat;
+    background-position: center;
+}
