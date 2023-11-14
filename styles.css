@@ -13,6 +13,7 @@ body {
   grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr;
   grid-area: 2/2/3/3;
   justify-self: center;
+  cursor: pointer;
 }
 
 .cell{
