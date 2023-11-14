@@ -1,35 +1,114 @@
-body{
-    display: grid;
-    grid-template: repeat(3, 1fr)/repeat(3, 1fr);
-    height: 100vh;
-}
-.gameboard{
-    display: grid;
-    width: 500px;
-    height: 500px;
-    grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr;
-    grid-area: 2/2/3/3;
-}
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-div{
-    display: flex;
-    text-align: center;
-    border: 2px solid black;
-    justify-content: center;
+body {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  height: 100vh;
+  background-color: #543d67;
 }
-
-.mark{
-    height: 90px;
-    width: 90px;
-    align-self: center;
-}
-
-.game-results{
-    margin-top: 250px;
-    grid-area: 1/1/2/4;
+.gameboard {
+  display: grid;
+  width: 600px;
+  height: 600px;
+  grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr;
+  grid-area: 2/2/3/3;
+  justify-self: center;
 }
 
 .cell{
-    background-repeat: no-repeat;
-    background-position: center;
+  display: flex;
+  text-align: center;
+  border: 2px solid gold;
+  justify-content: center;
+}
+
+.board1,.board4,.board7{
+    border-left: none;
+}
+.board1,.board2,.board3{
+    border-top: none;
+}
+
+.board7,.board8,.board9{
+    border-bottom: none;
+}
+
+.board3,.board6,.board9{
+    border-right: none;
+}
+
+
+
+
+.mark {
+  height: 90px;
+  width: 90px;
+  align-self: center;
+}
+.title{
+    text-transform: uppercase;
+    grid-area: 1/2/2/3;
+   text-align: center;
+   width: 100%;
+   height: fit-content;
+   font-family: Black Ops One;
+   font-size: 70px;
+   color: gold;
+   letter-spacing: 5px;
+}
+
+.title::after{
+    display: inline-block;
+    content: "Jungle Edition";
+    text-transform: uppercase;
+    color: gold;
+    font-family: Black Ops One;
+    font-size: 22px;
+    transform-origin: center;
+    transform: rotate(-35deg);
+    letter-spacing: 2px;
+    position: relative;
+    top: -60px;
+    left: 280px;
+    
+}
+.game-result{
+  grid-area: 2/3/3/4;
+  font-family: Black Ops One;
+  margin-left: 75px;
+  color: white;
+  width: 500px;
+  font-size: 70px;
+  position: relative;
+  top: 25px;
+}
+
+.cell {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 140px;
+  
+}
+
+#restart{
+    grid-area: 3/2/4/3;
+    width: 300px;
+    height: 60px;
+    justify-self: center;
+    align-self: center;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff9900;
+    color: white;
+    font-size: 28px;
+    letter-spacing: 10px;
+    font-family: Black Ops One;
+}
+
+#restart:hover{
+    filter: brightness(0.8);
+}
+
+#restart:active{
+    transform: translate(3px,3px);
 }
