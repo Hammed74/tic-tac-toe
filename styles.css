@@ -1,0 +1,25 @@
+body{
+    display: grid;
+    grid-template: repeat(3, 1fr)/repeat(3, 1fr);
+    height: 100vh;
+}
+.gameboard{
+    display: grid;
+    width: 500px;
+    height: 500px;
+    grid-template: 1fr 1fr 1fr/ 1fr 1fr 1fr;
+    grid-area: 2/2/3/3;
+}
+
+div{
+    display: flex;
+    text-align: center;
+    border: 2px solid black;
+    justify-content: center;
+}
+
+.mark{
+    height: 90px;
+    width: 90px;
+    align-self: center;
+}
