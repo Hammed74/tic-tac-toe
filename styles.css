@@ -54,7 +54,7 @@ header{
    text-align: center;
    height: fit-content;
    font-family: Black Ops One;
-   font-size: 70px;
+   font-size: 5em;
    color: gold;
    letter-spacing: 5px;
    min-width: 600px;
@@ -68,7 +68,7 @@ header{
     text-transform: uppercase;
     color: gold;
     font-family: Black Ops One;
-    font-size: 22px;
+    font-size: 1.25rem;
     transform-origin: center;
     transform: rotate(-35deg);
     letter-spacing: 2px;
