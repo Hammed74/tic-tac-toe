@@ -4,15 +4,14 @@ function createPlayer(type) {
   return { playerType };
 }
 
-const players = {
-  playerX: createPlayer("x"),
-  playerO: createPlayer("o"),
-};
-
-  let isOver = false;
-
-const createGameBoard = (function () {
-  let board = Array(9).fill(null);
+ let isOver = false;
+ function initializeGame(){ 
+      const players = {
+        playerX: createPlayer("x"),
+        playerO: createPlayer("o"),
+      };
+const createGameBoard = function () {
+  const board = Array(9).fill(null);
   const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -36,66 +35,77 @@ const result = document.querySelector(".game-result")
         console.log(piece + " has won!");
         board.fill(0, null, 9);
         isOver = true;
+       
         if(piece === "x"){
             result.textContent = "Tiger Is King Of The Jungle"
-        } else if(piece === "o")
+            return
+        } else if(piece === "o"){
             result.textContent = "Gorilla Is King Of The Jungle"
+            return
+      } 
+        return
+    }
+        });
+      if(!board.includes(null) && !isOver){
+        result.textContent = "Draw!"
+        console.log("Draw!")
+        board.fill(0,null,9)
+        isOver = true
       }
       return;
-    });
   };
   return { board, checkWinner, result};
-})();
+};
 
 const gameFlow = function () {
-createGameBoard.isOver = false
+    const {board, checkWinner, result} = createGameBoard()
   const cells = document.querySelectorAll(".cell");
   const restart = document.getElementById("restart")
+  const commentary = document.querySelector(".game-commentary")
   let currentPlayer = players.playerX;
   const startGame = () => {
 
-    
     cells.forEach((cell) => {
       cell.addEventListener("click", (event) => {
         const id = event.target.id;
         if (
           currentPlayer === players.playerX &&
-          isOver === false && createGameBoard.board[id - 1] == null
+          !isOver && board[id - 1] == null
         ) {
-          createGameBoard.board[id - 1] = "x";
+          board[id - 1] = "x";
           cell.style.backgroundImage = "url(assets/tiger.png)";
           currentPlayer = players.playerO;
-          createGameBoard.checkWinner("x");
-          console.log(createGameBoard.board);
+          checkWinner("x");
+          console.log(board);
           console.log(isOver);
+          commentary.textContent = "";
         } else if (
           currentPlayer === players.playerO &&
-          isOver === false && createGameBoard.board[id - 1] == null
+          !isOver && board[id - 1] == null
         ) {
-          createGameBoard.board[id - 1] = "o";
+          board[id - 1] = "o";
           cell.style.backgroundImage = "url(assets/gorilla.png)";
           currentPlayer = players.playerX;
-          createGameBoard.checkWinner("o");
-          console.log(createGameBoard.board);
+          checkWinner("o");
+          console.log(board);
           console.log(isOver)
-        } else if (isOver === true) {
+          commentary.textContent = "";
+        } else if (isOver) {
             restartGame()
         } else{
-            alert("You cant do that")
+            commentary.textContent = "You Can't Do That!"
         }
       });
     });
       const restartGame = function () {
-        createGameBoard.result.textContent = ""
-        createGameBoard.board.fill(null);
+        result.textContent = ""
+        board.fill(null);
         currentPlayer = players.playerX;
         isOver = false;
         cells.forEach((cell) => {
           cell.style.backgroundImage = "";
         });
-        restart.addEventListener("click", () => {
-            restartGame()
-        })
+        restart.addEventListener("click", restartGame)
       };
       return restartGame()
   };
@@ -104,3 +114,6 @@ createGameBoard.isOver = false
 
 
 gameFlow();
+ }
+
+ initializeGame()
