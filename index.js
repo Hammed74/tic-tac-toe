@@ -102,6 +102,7 @@ const gameFlow = function () {
         board.fill(null);
         currentPlayer = players.playerX;
         isOver = false;
+        commentary.textContent = ""
         cells.forEach((cell) => {
           cell.style.backgroundImage = "";
         });
@@ -117,3 +118,5 @@ gameFlow();
  }
 
  initializeGame()
+
+ console.log(window.innerWidth)
